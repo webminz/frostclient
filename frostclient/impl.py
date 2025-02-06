@@ -1,6 +1,8 @@
 from datetime import date
+
+from requests.models import HTTPBasicAuth # type: ignore
 from frostclient.api import FrostClient, Observation
-import requests
+import requests # type: ignore
 
 class FrostClientImpl(FrostClient):
 
@@ -20,7 +22,7 @@ class FrostClientImpl(FrostClient):
         return url
 
     def _call_get_sensor_api(self, location) -> str:
-        result = requests.get(self._translate_get_location_url(location), auth={requests.auth.BasicAuth(self.frost_username, "")})
+        result = requests.get(self._translate_get_location_url(location), auth=HTTPBasicAuth(username=self.frost_username, password=""))
         if result.status_code == 200:
             pass 
         else:
