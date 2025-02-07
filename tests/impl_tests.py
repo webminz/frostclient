@@ -129,7 +129,7 @@ class FrostApiImplTests(TestCase):
     @patch("requests.get")
     def test_get_frost_api(self, call_to_requests_get: MagicMock):
         expected = "SN50540"
-        client = FrostClientImpl("4d0c8841-7200-4e21-abe7-c8b55b929dfa")
+        client = FrostClientImpl("")
 
         mock_response = MagicMock()
         mock_response.status_code = 200
