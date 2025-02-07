@@ -1,0 +1,13 @@
+name: Frost Client CI Pipeline
+on: [push]
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+      - name: Install dependencies
+        run: poetry install
+      - name: Run unit tests
+        run: poetry run python3 tests/impl_tests.py
+
