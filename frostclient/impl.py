@@ -21,10 +21,14 @@ class FrostClientImpl(FrostClient):
         url = f"https://frost.met.no/sources/v0.jsonld?types=SensorSystem&name={location}*"
         return url
 
+    def _parse_get_sensor_resposnse(self, jason: dict) -> str:
+        return jason["data"][0]["id"]
+
     def _call_get_sensor_api(self, location) -> str:
         result = requests.get(self._translate_get_location_url(location), auth=HTTPBasicAuth(username=self.frost_username, password=""))
         if result.status_code == 200:
-            pass 
+            body = result.json()
+            return self._parse_get_sensor_resposnse(body)
         else:
-            pass
+            raise ValueError("HTTP response fail")
         
